@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C0DFDE3256F7C40004C4CB4 /* STView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0DFDE2256F7C40004C4CB4 /* STView.m */; };
 		4C292DD62564AF6400BCE5A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C292DD52564AF6400BCE5A2 /* AppDelegate.m */; };
 		4C292DD92564AF6400BCE5A2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C292DD82564AF6400BCE5A2 /* SceneDelegate.m */; };
 		4C292DDC2564AF6400BCE5A2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C292DDB2564AF6400BCE5A2 /* ViewController.m */; };
@@ -14,7 +15,6 @@
 		4C292DE12564AF6400BCE5A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C292DE02564AF6400BCE5A2 /* Assets.xcassets */; };
 		4C292DE42564AF6400BCE5A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C292DE22564AF6400BCE5A2 /* LaunchScreen.storyboard */; };
 		4C292DE72564AF6400BCE5A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C292DE62564AF6400BCE5A2 /* main.m */; };
-		4C292E2C2564AF8900BCE5A2 /* STView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C292E2B2564AF8900BCE5A2 /* STView.m */; };
 		4C292E682565111D00BCE5A2 /* STTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C292E672565111D00BCE5A2 /* STTableViewController.m */; };
 		4C292E872565141F00BCE5A2 /* K3MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C292E6E2565141F00BCE5A2 /* K3MASCompositeConstraint.m */; };
 		4C292E882565141F00BCE5A2 /* ViewController+K3MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C292E732565141F00BCE5A2 /* ViewController+K3MASAdditions.m */; };
@@ -29,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C0DFDE1256F7C40004C4CB4 /* STView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STView.h; sourceTree = "<group>"; };
+		4C0DFDE2256F7C40004C4CB4 /* STView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STView.m; sourceTree = "<group>"; };
 		4C292DD12564AF6400BCE5A2 /* AutoLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C292DD42564AF6400BCE5A2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4C292DD52564AF6400BCE5A2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -41,8 +43,6 @@
 		4C292DE32564AF6400BCE5A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C292DE52564AF6400BCE5A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C292DE62564AF6400BCE5A2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4C292E2A2564AF8900BCE5A2 /* STView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STView.h; path = ../../testUI/testUI/STView.h; sourceTree = "<group>"; };
-		4C292E2B2564AF8900BCE5A2 /* STView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STView.m; path = ../../testUI/testUI/STView.m; sourceTree = "<group>"; };
 		4C292E662565111D00BCE5A2 /* STTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTableViewController.h; sourceTree = "<group>"; };
 		4C292E672565111D00BCE5A2 /* STTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STTableViewController.m; sourceTree = "<group>"; };
 		4C292E6E2565141F00BCE5A2 /* K3MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = K3MASCompositeConstraint.m; sourceTree = "<group>"; };
@@ -111,8 +111,8 @@
 				4C292DDB2564AF6400BCE5A2 /* ViewController.m */,
 				4C292E662565111D00BCE5A2 /* STTableViewController.h */,
 				4C292E672565111D00BCE5A2 /* STTableViewController.m */,
-				4C292E2A2564AF8900BCE5A2 /* STView.h */,
-				4C292E2B2564AF8900BCE5A2 /* STView.m */,
+				4C0DFDE1256F7C40004C4CB4 /* STView.h */,
+				4C0DFDE2256F7C40004C4CB4 /* STView.m */,
 				4C292DDD2564AF6400BCE5A2 /* Main.storyboard */,
 				4C292DE02564AF6400BCE5A2 /* Assets.xcassets */,
 				4C292DE22564AF6400BCE5A2 /* LaunchScreen.storyboard */,
@@ -235,10 +235,10 @@
 				4C292E682565111D00BCE5A2 /* STTableViewController.m in Sources */,
 				4C292E8B2565141F00BCE5A2 /* K3MASViewAttribute.m in Sources */,
 				4C292DE72564AF6400BCE5A2 /* main.m in Sources */,
-				4C292E2C2564AF8900BCE5A2 /* STView.m in Sources */,
 				4C292E892565141F00BCE5A2 /* NSArray+K3MASAdditions.m in Sources */,
 				4C292E872565141F00BCE5A2 /* K3MASCompositeConstraint.m in Sources */,
 				4C292DD92564AF6400BCE5A2 /* SceneDelegate.m in Sources */,
+				4C0DFDE3256F7C40004C4CB4 /* STView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
