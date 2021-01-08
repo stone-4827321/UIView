@@ -263,10 +263,20 @@
   - 优先级越大，视图就越不容易被压小。
   - 当自动布局系统为所有视图布局时，遇到约束要求该视图的尺寸需要小于其内部内容尺寸会用到。
 
+  ```objective-c
+  // 设置水平方向，优先级为1000
+  [view setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+  ```
+
 - **内容吸附**是指视图阻止其大小被拉伸到大于其内部内容尺寸的优先级，即视图反拉伸的优先级（默认250）。
 
   - 优先级越大，视图就越不容易被拉大。
   - 当自动布局系统为所有视图布局时，遇到约束要求该视图的尺寸需要大于其内部内容尺寸会用到。
+
+  ```objective-c
+  // 设置水平方向，优先级为1000
+  [view setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+  ```
 
 ### 约束更新
 
