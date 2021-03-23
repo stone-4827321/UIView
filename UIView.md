@@ -10,7 +10,7 @@
 
 ## Update Cycle
 
-- Update cycle（drawing cycle）是当应用完成了所有事件处理代码后控制流回到主 RunLoop 时的那个时间点。正是在这个时间点上系统开始更新布局、显示和设置约束。
+- Update cycle（drawing cycle）是当应用完成了所有事件处理代码后，在RunLoop 即将进入休眠和即将退出的事件回调中进行的。在回调函数中会遍历所有待处理的 view，对其执行实际的更新布局、显示和设置约束。
 
   ![](https://tva1.sinaimg.cn/large/0081Kckwgy1gks5z03kehj30u00uxagk.jpg)
 
