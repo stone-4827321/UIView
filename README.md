@@ -2,8 +2,11 @@
 
 - `UIView` 表示屏幕上的一块矩形区域，负责渲染区域的内容，并且响应该区域内发生的触摸事件。它在 iOS App 中占有绝对重要的地位，因为 iOS 中几乎所有可视化控件都是 `UIView` 的子类。
 - `UIView` 可以负责以下几种任务：
+
   - 布局和子视图管理
+  
   - 绘制和动画
+  
   - 事件处理
 
 # 布局和显示
@@ -29,7 +32,9 @@
 - **layoutIfNeeded**
 
   - **立即布局被标记需要重新布局的视图**。
+  
   - 使用接收消息的视图作为根视图，开始遍历子视图树，如果存在被标记的视图，则立即调用 `layoutSubviews`。
+  
   - 当使用 Auto Layout 且通过修改 constraint 进行动画时：在 animation block 之前可调用 `layoutIfNeeded` 以确保在动画开始之前更新所有的布局；在 animation block 中设置新 constrait 后需要再次调用 `layoutIfNeeded` 来动画到新的状态。
 
 - **layoutSubviews**
@@ -37,6 +42,7 @@
   - 作用：自动布局达不到效果时才有必要重写，可以对子视图的 `frame` 进行布局。
 
     - 需要调用 `[super layoutSubviews]`。
+    
     - 使用 Auto Layou 对子视图进行重新布局时，使子视图的 constraints 失效的代码必须在调用  `[super layoutSubviews]` 之前执行。
 
   - 不要直接调用这个方法（开销很大，因为它会在每个子视图上起作用并且调用它们的这一方法），由系统调用：
@@ -98,7 +104,9 @@
 - **setNeedsDisplay**
 
   - **标记为需要重新绘制，但是绘制视图的方法 `drawRect: ` 需要等到下一个绘制周期执行，并非调用该方法立即执行。**
+  
   - 系统触发：`[UIView initWithFrame:]` ，`[UIView(Hierarchy) _setBackgroundColor:]` 等方法执行后。
+  
   - **主动调用本方法：自定义一个视图子类并重写了 `drawRect:` 方法，需要触发 `drawRect:` 方法以重新绘制内容**。
 
 - **drawRect:**
@@ -138,12 +146,19 @@
       ```
 
 - `CALayer` 的几个相关方法：
+
   - `setNeedsDisplay` 标记 Layer 需要绘制；
+  
   - `displayIfNeeded` 立即对标记 Layer 进行绘制；
+  
   - 绘制时依次检测 `display`、delegate 的 `displayLayer:`、`drawInContext:`、delegate 的`drawLayer:inContext:`，其中任何一个方法实现了，就认为已经为 Layer 提供了内容，进行绘制。
+  
   - 和 View 的方法的关系：
+  
     - 重写 View 的 `drawRect:` 后， `setNeedsDisplay` 方法会调用 Layer 的 `setNeedsDisplay` 方法；
+    
     - 重写 View 的 `drawRect:` 后，View 的 `drawRect:` 方法是由 Layer 的 delegate 的 `drawLayer:inContext:` 调用的；若检测方法不是系统实现时（重写或实现），View 的 `drawRect:` 方法不会被触发。
+    
     - 因此，当使用检测方法进行绘制时，必须要重写一个空方法 `drawRect:`。
 
 - 内存暴增：一旦实现了 `CALayerDelegate` 协议中的 `drawLayer:inContext:` 方法或者 `UIView` 中的 `drawRect:` 方法（其实就是前者的包装方法），图层就创建了一个绘制上下文，这个上下文需要的内存为：图层宽 x 图层高x 4字节。
@@ -153,7 +168,9 @@
 - Auto Layout 通过约束来描述视图间的关系，能够动态地根据外部和内部的变化来修改布局：
 
     - 外部因素：屏幕旋转、iPad 分屏、不同尺寸的屏幕等；
+    
     - 内部因素：文本或图片内容变化、支持多语言等。
+    
 - **Auto Layout 本质就是一个表示视图关系的线性方程解析**。基于Auto Layout的布局，不在需要像 frame 时代一样，关注视图尺寸、位置的常数，转而关注视图之间关系，描述一个表示视图间布局关系的约束集合，并解析出最终数值。
 
 - `UIView` 的属性 `translatesAutoresizingMaskIntoConstraints` 表示可以把 frame ，bouds，center 方式布局的视图自动转化为约束形式。若使用 Auto Layout 方式布局时，需要将其设置为 NO。
@@ -186,8 +203,11 @@
 - 添加约束：在创建约束之后，需要将其添加到作用的 view 上。 目标 view 需要遵循以下规则：
 
     - 以固定值设置视图尺寸时，添加到视图之上；
+    
     - 对于两个同层级视图之间的约束关系，应该添加到它们的父视图之上；
+    
     - 对于两个不同层级视图之间的约束关系，应该添加到它们最近的共同父视图上；
+    
     - 对于有层次关系的两个视图之间的约束关系，添加到层次较高的父视图上。
 
     ```objective-c
@@ -199,6 +219,7 @@
 - 激活约束：在 ios 8 之后，可以不用通过约束添加函数使约束生效，可以直接设置约束的 `active` 属性设置为 YES，使其生效。即：
 
     - 设置属性 `active = YES` 或 `[NSLayoutConstraint activateConstraints:]` 会让该约束的 view 调用 `addConstraint:`。
+    
     - 设置属性 `active = NO` 或  `[NSLayoutConstraint deactivateConstraints:]` 会让该约束的 view 调用 `removeConstraint:`；
 
 
@@ -249,6 +270,7 @@
 - 每个视图都有内容压缩阻力优先级 **Content Compression Resistance Priority** 和内容吸附性优先级 **Content Hugging Priority**。但只有当视图定义了内部内容尺寸后（默认为 -1,-1），这两种优先级才会起作用。
 
   - 当内部尺寸发生变化后，需要调用 `invalidateIntrinsicContentSize` 方法通知系统。
+  
   - 如果内部尺寸只有一个维度是固定值，则可设置另外一个未知维度值为  `UIViewNoIntrinsicMetric` 。
 
   ```objective-c
@@ -261,6 +283,7 @@
 - **压缩阻力**是指视图阻止其大小被压缩到小于其内部内容尺寸的优先级，即视图反压缩的优先级（默认750）。-
 
   - 优先级越大，视图就越不容易被压小。
+  
   - 当自动布局系统为所有视图布局时，遇到约束要求该视图的尺寸需要小于其内部内容尺寸会用到。
 
   ```objective-c
@@ -271,6 +294,7 @@
 - **内容吸附**是指视图阻止其大小被拉伸到大于其内部内容尺寸的优先级，即视图反拉伸的优先级（默认250）。
 
   - 优先级越大，视图就越不容易被拉大。
+  
   - 当自动布局系统为所有视图布局时，遇到约束要求该视图的尺寸需要大于其内部内容尺寸会用到。
 
   ```objective-c
@@ -281,13 +305,19 @@
 ### 约束更新
 
 - **setNeedsUpdateConstraints**
+
   - **标记为需要重新更新约束，但是更新约束的方法 `updateConstraints` 需要等到下一个绘制周期执行，并非调用该方法立即执行。**
+  
 - **updateConstraintsIfNeeded**
+
   - **立即更新被标记需要更新约束的视图**。
 
 - **updateConstraints**
+
   - 作用：重写本方法以实现约束的更新。
+  
     - 需要在最后调用 `[super updateConstraints]`。
+    
   - 不要直接调用这个方法 ，由系统调用。
 
 # 动画
@@ -295,8 +325,11 @@
 - `UIView` 动画实质上是对 Core Animation 的封装，提供简洁的动画接口。
 
 - `UIView` 动画可以设置的动画属性有：
+
   - 坐标尺寸属性：`frame`、`bounds`、`center`
+  
   - 显示属性：` backgroundColor `、`alpha `、`hidden`
+  
   - 形态属性：`transform`、`contentStretch`
 
 # 触摸传递和响应
@@ -316,17 +349,27 @@
 - 寻找流程：
 
   - 采用深度优先的反序访问迭代算法（先访问根节点然后从高到低访问低节点），以向 `UIWindow`（视图层次结构的根视图）发送 `hitTest:withEvent:` 消息开始。
+  
     - `hitTest:withEvent:` 方法返回视图对象，返回值不为 nil 时表示该视图可以响应该事件。
+    
   - 触摸点在视图范围内才有机会成为命中测试视图，即 `pointInside:withEvent:` 方法返回 YES。
+  
   - 以下三种情况的视图不能成为命中测试视图：
+  
     - 不允许交互：`userInteractionEnabled = NO`；
+    
     - 隐藏：`hidden = YES`；
+    
     - 透明度：`alpha < 0.01`。
 
   - 假设视图 A 满足以上条件，若其
+  
     - 无子视图：A 为命中测试视图；
+    
     - 有子视图：按加入顺序，从后往前遍历所有子视图，若
+    
       - 所有子视图都不满足条件：A 为命中测试视图；
+      
       - 子视图 A1 满足条件：对 A1 继续执行本判断。
 
   ```objective-c
@@ -379,14 +422,19 @@
 - **响应者对于事件的操作方式**：响应者对于事件的拦截以及传递都是通过 `touchesBegan:withEvent:` 方法控制的：
 
   - 不拦截：默认操作，事件会自动沿着默认的响应链往下传递；
+  
   - 拦截，不再往下分发事件：重写此方法并做自身处理，不调用 `[nextResponder touchesBegan:withEvent:]`；
+  
   - 拦截，继续往下分发事件：重写此方法并做自身处理，调用 `[nextResponder touchesBegan:withEvent:]`；
 
 - **响应链中的事件传递规则**：每一个响应者对象（`UIResponder` 对象）都有一个 `nextResponder` 方法，用于获取响应链中当前对象的下一个响应者。因此，一旦事件的最佳响应者确定了，这个事件所处的响应链就确定了。对于响应者对象，默认的 `nextResponder` 实现如下：
 
   - `UIView`：若视图是控制器的根视图，则其下一响应者为控制器对象；否则，其下一响应者为父视图；
+  
   - `UIViewController`：若控制器的视图是 `window` 的根视图，则其下一响应者为窗口对象；若控制器是从别的控制器 present 出来的，则其下一响应者为 presenting view controller；
+  
   - `UIWindow`：其下一响应者为 `UIApplication` 对象；
+  
   - `UIApplication`：若当前应用的 app delegate 是一个 `UIResponder` 对象，且不是 `UIView`、`UIViewController` 或 app 本身，则其下一响应者为 app delegate。
 
   ![](https://tva1.sinaimg.cn/large/0081Kckwgy1gkt4qazu3tj30jg0bsdfs.jpg)
@@ -408,7 +456,9 @@
 - 手势识别器的三个相关属性：
 
   - `cancelsTouchesInView`：手势识别器成功识别了手势之后，是否会取消响应者对事件的响应，只有识别失败才不会取消。默认为 YES，会取消，即触发 `[UIView touchesCancelled:withEvent:]`；
+  
   - `delaysTouchesBegan`：手势识别器成功识别了手势之后，是否会拦截响应者对事件的响应，只有识别失败才不会拦截。默认为 NO，不会拦截，即触发 `[UIView touchesBegan:withEvent:]`；
+  
   - `delaysTouchesEnded`：手势识别器识别失败后，是否会延迟0.15ms后再发送 `touchesEnded:withEvent:]`。默认为 YES，会延迟。
 
   ```objective-c
